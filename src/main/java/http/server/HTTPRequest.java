@@ -3,12 +3,12 @@ package http.server;
 import java.io.*;
 import java.util.Date;
 
-public class HTTPRequest {
+class HTTPRequest {
 
-    static final File WEB_ROOT = new File(".");
-    static final String DEFAULT_FILE = "index.html";
-    static final String FILE_NOT_FOUND = "404.html";
-    static final String METHOD_NOT_SUPPORTED = "501.html";
+    private static final File WEB_ROOT = new File(".");
+    private static final String DEFAULT_FILE = "index.html";
+    private static final String FILE_NOT_FOUND = "404.html";
+    private static final String METHOD_NOT_SUPPORTED = "501.html";
 
     private File file;
     private int fileLength;
@@ -18,7 +18,7 @@ public class HTTPRequest {
     private PrintWriter out;
     private BufferedOutputStream dataOut;
 
-    public HTTPRequest(RequestType type, String fileRequested, PrintWriter out, BufferedOutputStream dataOut) throws IOException {
+    HTTPRequest(RequestType type, String fileRequested, PrintWriter out, BufferedOutputStream dataOut) throws IOException {
 
         this.type = type;
         this.out = out;
@@ -102,9 +102,9 @@ public class HTTPRequest {
 
         if(!file.exists()){
             fileRequested = FILE_NOT_FOUND;
+            this.file = new File(WEB_ROOT, fileRequested);
+            throw new FileNotFoundException();
         }
-
-        file = new File(WEB_ROOT, fileRequested);
 
         content = getContentType(fileRequested);
         return file;
@@ -118,6 +118,7 @@ public class HTTPRequest {
             return "text/plain";
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private byte[] readFileData(int fileLength) throws IOException {
         FileInputStream fileIn = null;
         byte[] fileData = new byte[fileLength];
