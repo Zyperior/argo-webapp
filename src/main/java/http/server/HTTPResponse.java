@@ -15,11 +15,11 @@ class HTTPResponse {
 	private RequestType type;
 	private String fileRequested;
 	private String params;
-	private String content;
+	private String content = "text/plain";
 	private PrintWriter out;
 	private BufferedOutputStream dataOut;
 
-	HTTPResponse(RequestType type, String fileRequested, String content, PrintWriter out, BufferedOutputStream dataOut)
+	HTTPResponse(RequestType type, String fileRequested, PrintWriter out, BufferedOutputStream dataOut)
 			throws IOException {
 		// check and retrieve params if they exist
 		try {
@@ -34,6 +34,13 @@ class HTTPResponse {
 
 		} catch (ArrayIndexOutOfBoundsException e) {
 
+		}
+
+		//Check if filerequested is a static file of known type
+		for (KnownFileTypes ftype: KnownFileTypes.values()) {
+			if(this.fileRequested.endsWith(ftype.getSuffix())){
+				content = ftype.getContentType();
+			}
 		}
 
 		this.type = type;
@@ -110,7 +117,6 @@ class HTTPResponse {
 			dataOut.write(fileData, 0, fileLength);
 		}
 		dataOut.flush();
-		out.close();
 	}
 
 	private File getRequestedFile() throws FileNotFoundException {
