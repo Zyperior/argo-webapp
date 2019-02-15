@@ -74,11 +74,12 @@ class HTTPResponse {
 
 	private void get() throws IOException {
 		out.println("HTTP/1.1 200 OK");
-		standardOutToClient();
+		standardOutToClient(true);
 	}
 
-	private void head() {
-
+	private void head() throws IOException {
+		out.println("HTTP/1.1 200 OK");
+		standardOutToClient(false);
 	}
 
 	private void post() {
@@ -87,16 +88,16 @@ class HTTPResponse {
 
 	private void invalid() throws IOException {
 		out.println("HTTP/1.1 501 Not Implemented");
-		standardOutToClient();
+		standardOutToClient(true);
 	}
 
 	private void fileNotFound() throws IOException {
 		out.println("HTTP/1.1 404 File Not Found");
-		standardOutToClient();
+		standardOutToClient(true);
 
 	}
 
-	private void standardOutToClient() throws IOException {
+	private void standardOutToClient(boolean body) throws IOException {
 		byte[] fileData = readFileData(fileLength);
 
 		out.println("Server: Java HTTP Server from SSaurel : 1.0");
@@ -105,7 +106,9 @@ class HTTPResponse {
 		out.println("Content-length: " + fileLength);
 		out.println(); // blank line between headers and content, very important !
 		out.flush(); // flush character output stream buffer
-		dataOut.write(fileData, 0, fileLength);
+		if(body){
+			dataOut.write(fileData, 0, fileLength);
+		}
 		dataOut.flush();
 		out.close();
 	}
