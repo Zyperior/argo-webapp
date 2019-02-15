@@ -40,15 +40,23 @@ public class JavaHTTPServer implements Runnable {
 				}
 			}
 
-			if (method.equals("GET")) {
-				type = RequestType.GET;
-			} else if (method.equals("HEAD")) {
-				type = RequestType.HEAD;
-			} else if (method.equals("POST")) {
-				type = RequestType.POST;
-			}
+			//Check if filerequested is a static file of known type
+            for (KnownFileTypes ftype: KnownFileTypes.values()) {
 
-			new HTTPRequest(type, fileRequested, out, dataOut);
+                if(fileRequested.endsWith(ftype.getSuffix())){
+                    if (method.equals("GET")) {
+                        type = RequestType.GET;
+                    } else if (method.equals("HEAD")) {
+                        type = RequestType.HEAD;
+                    } else if (method.equals("POST")) {
+                        type = RequestType.POST;
+                    }
+
+                    new HTTPResponse(type, fileRequested, ftype.getContentType(), out, dataOut);
+                }
+            }
+
+
 
 		} catch (IOException ioe) {
 

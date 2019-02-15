@@ -3,7 +3,7 @@ package http.server;
 import java.io.*;
 import java.util.Date;
 
-class HTTPRequest {
+class HTTPResponse {
 
 	private static final File WEB_ROOT = new File(".");
 	private static final String DEFAULT_FILE = "index.html";
@@ -19,7 +19,7 @@ class HTTPRequest {
 	private PrintWriter out;
 	private BufferedOutputStream dataOut;
 
-	HTTPRequest(RequestType type, String fileRequested, PrintWriter out, BufferedOutputStream dataOut)
+	HTTPResponse(RequestType type, String fileRequested, String content, PrintWriter out, BufferedOutputStream dataOut)
 			throws IOException {
 		// check and retrieve params if they exist
 		try {
@@ -44,6 +44,8 @@ class HTTPRequest {
 		System.out.println(this.fileRequested);
 		System.out.println(this.params);
 
+
+
 		try {
 			this.file = getRequestedFile();
 		} catch (FileNotFoundException e) {
@@ -51,6 +53,8 @@ class HTTPRequest {
 		}
 
 		this.fileLength = (int) file.length();
+
+		this.content = content;
 
 		switch (type) {
 		case GET:
@@ -126,16 +130,8 @@ class HTTPRequest {
 			throw new FileNotFoundException();
 		}
 
-		content = getContentType(fileRequested);
 		return file;
 
-	}
-
-	private String getContentType(String fileRequested) {
-		if (fileRequested.endsWith(".htm") || fileRequested.endsWith(".html"))
-			return "text/html";
-		else
-			return "text/plain";
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
