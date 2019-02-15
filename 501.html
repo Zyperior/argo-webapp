@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Not supported</title>
-    <script>
-        function goHome() {
-            var Http = new XMLHttpRequest();
-            var Url = "index.html";
-            Http.open("GET",Url);
-            Http.send();
-
-        }
-    </script>
 </head>
-<body>
+<body id="demo">
 <h1>501 Bad Request!</h1>
 <pre>
     The server does not support the request type.
 </pre>
 <br>
-<button onclick="goHome()">Return to Home</button>
+<button onclick="loadIndex()">Return to Home</button>
+
+<script>
+    function loadIndex() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").parentElement.innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "/index.html", true);
+        xhttp.send();
+    }
+</script>
 
 </body>
 </html>

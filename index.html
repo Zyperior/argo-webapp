@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <title>Index</title>
 </head>
-<body>
+<body id="demo">
 <h1>My first paragraph</h1>
 <p>My second paragraph</p>
+<br>
+<button onclick="loadNotFound()">Return to Home</button>
+
+<script>
+    function loadNotFound() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").parentElement.innerHTML =
+                    this.responseText;
+            }
+        };
+        xhttp.open("GET", "/501.html", true);
+        xhttp.send();
+    }
+</script>
 
 </body>
 </html>
