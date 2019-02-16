@@ -1,4 +1,4 @@
-package http.server;
+package http.server.response;
 
 public enum RequestType {
 

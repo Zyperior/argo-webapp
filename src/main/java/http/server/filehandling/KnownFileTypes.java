@@ -1,4 +1,4 @@
-package http.server;
+package http.server.filehandling;
 
 public enum KnownFileTypes {
     HTML(".html", "text/html"),

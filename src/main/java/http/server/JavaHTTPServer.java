@@ -1,5 +1,8 @@
 package http.server;
 
+import http.server.response.HttpResponseFactory;
+import http.server.response.RequestType;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.StringTokenizer;
@@ -48,10 +51,7 @@ public class JavaHTTPServer implements Runnable {
                 type = RequestType.POST;
             }
 
-            new HTTPResponse(type, fileRequested, out, dataOut);
-
-
-
+            HttpResponseFactory.createResponse(type, fileRequested, out, dataOut);
 
 
 		} catch (IOException ioe) {
