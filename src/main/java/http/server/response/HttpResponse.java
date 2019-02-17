@@ -4,6 +4,7 @@ import http.server.filehandling.FileReader;
 import http.server.filehandling.FileRetriever;
 import http.server.filehandling.KnownFileTypes;
 import http.server.filehandling.StandardFileNames;
+import http.server.serviceloader.PluginLoader;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -52,8 +53,11 @@ abstract class HttpResponse {
             }
 
             if(paramList != null){
+
+                String[] test = new String[1];
                 for (String key : paramList.keySet()){
-                    System.out.println(key + " " + paramList.get(key));
+                    System.out.println(key + " " + paramList.get(key).get(0));
+                    PluginLoader.run(key, paramList.get(key).get(0), test);
                 }
             }
 

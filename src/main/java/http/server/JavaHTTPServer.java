@@ -39,7 +39,7 @@ public class JavaHTTPServer implements Runnable {
 				if (parse.hasMoreTokens()) {
 					method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
 
-					fileRequested = parse.nextToken().toLowerCase();
+					fileRequested = parse.nextToken();
 				}
 			}
 

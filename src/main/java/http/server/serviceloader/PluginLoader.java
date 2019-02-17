@@ -9,8 +9,8 @@ import java.util.ServiceLoader;
 
 public class PluginLoader {
 
-    private URLClassLoader createClassLoader(){
-        File loc = new File("/plugins/");
+    private static URLClassLoader createClassLoader(){
+        File loc = new File("./plugins");
         File[] fileList = loc.listFiles(new FileFilter() {
             public boolean accept(File fle) {return fle.getPath().toLowerCase().endsWith(".jar");}
         });
@@ -25,11 +25,15 @@ public class PluginLoader {
         return new URLClassLoader(urls);
     }
 
-    private void run(String thisPlugin, String doThis, String[] params) {
+    public static void run(String thisPlugin, String doThis, String[] params) {
         URLClassLoader ucl = createClassLoader();
 
         ServiceLoader<ARGOPlugin> loader = ServiceLoader.load(ARGOPlugin.class, ucl);
 
+        /**
+         * Code executes well until this loop. It just skips the loop all together as if there is
+         * nothing in the loader??
+         */
         for (ARGOPlugin plugin : loader) {
             if(plugin.getClass().getAnnotation(PluginType.class).value().equals(thisPlugin)){
                 plugin.doSomething(doThis,params);
