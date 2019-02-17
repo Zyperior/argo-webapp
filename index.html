@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="index.css">
     <meta charset="UTF-8">
     <title>Index</title>
 </head>
-<body>
+<body id="demo">
 <h1>My first paragraph</h1>
 <p>My second paragraph</p>
+<br>
+<form action="http://localhost:8080/501.html" method="get">
+    <input type="submit" value="501">
+</form>
+<form action="http://localhost:8080/404.html" method="get">
+    <input type="submit" value="404">
+</form>
 
+<form action="http://localhost:8080/index.html" method="get">
+    <input type="hidden" name="storeindb" value="true"/>
+    firstname: <input type="text" name="fname">
+    <br>
+    <input type="submit" value="submit">
+</form>
+ <br>
+<label><strong>Upload File : </strong><input type="file" id="uploadfiles" multiple="multiple" /></label><br/>
+<!-- Scripts -->
+<script src="upload.js"></script>
 </body>
 </html>

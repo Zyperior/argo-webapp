@@ -1,7 +1,11 @@
 package http.server;
 
+import http.server.response.HttpResponseFactory;
+import http.server.response.RequestType;
+
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class JavaHTTPServer implements Runnable {
@@ -20,14 +24,20 @@ public class JavaHTTPServer implements Runnable {
 		RequestType type = RequestType.INVALID;
 		String fileRequested = "";
 		String method = "";
+
+		// This arraylist contains the entire http request except the first row
+		ArrayList<String> requestData = new ArrayList<String>();
+
 		try {
 
 			in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 			out = new PrintWriter(connect.getOutputStream());
 			dataOut = new BufferedOutputStream(connect.getOutputStream());
+			String input = null;
 
-			String input = in.readLine();
-
+			if (in.ready()) {
+				input = in.readLine();
+			}
 			// Dont parse nulls!
 			if (input != null) {
 				StringTokenizer parse = new StringTokenizer(input);
@@ -39,6 +49,11 @@ public class JavaHTTPServer implements Runnable {
 					fileRequested = parse.nextToken().toLowerCase();
 				}
 			}
+			// Dump the rest of the buffered reader into an array we can use
+			// maxLines acts as a safety net to prevent infinite loop due to software errors
+			while (in.ready()) {
+				requestData.add(in.readLine());
+			}
 
 			if (method.equals("GET")) {
 				type = RequestType.GET;
@@ -48,7 +63,7 @@ public class JavaHTTPServer implements Runnable {
 				type = RequestType.POST;
 			}
 
-			new HTTPRequest(type, fileRequested, out, dataOut);
+			HttpResponseFactory.createResponse(type, fileRequested, out, dataOut, requestData);
 
 		} catch (IOException ioe) {
 
@@ -58,14 +73,18 @@ public class JavaHTTPServer implements Runnable {
 
 			try {
 				if (in != null) {
+
 					in.close();
 				}
 				if (out != null) {
+
 					out.close();
 				}
 				if (dataOut != null) {
+
 					dataOut.close();
 				}
+
 				connect.close(); // we close socket connection
 			} catch (Exception e) {
 				System.err.println("Error closing stream : " + e.getMessage());

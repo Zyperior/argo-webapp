@@ -3,23 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Not supported</title>
-    <script>
-        function goHome() {
-            var Http = new XMLHttpRequest();
-            var Url = "index.html";
-            Http.open("GET",Url);
-            Http.send();
-
-        }
-    </script>
 </head>
-<body>
+<body id="demo">
 <h1>501 Bad Request!</h1>
 <pre>
     The server does not support the request type.
 </pre>
 <br>
-<button onclick="goHome()">Return to Home</button>
-
+<form action="http://localhost:8080/index.html" method="get">
+    <input type="submit" value="index">
+</form>
 </body>
 </html>

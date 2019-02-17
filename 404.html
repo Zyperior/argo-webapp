@@ -3,15 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>File-Not-Found</title>
-    <script>
-        function goHome() {
-            var Http = new XMLHttpRequest();
-            var Url = "index.html";
-            Http.open("GET",Url);
-            Http.send();
-            
-        }
-    </script>
 </head>
 <body>
 <h1>404 File Not Found!</h1>
@@ -20,7 +11,9 @@
     Either the file does not exist or the file-path might be wrong.
 </pre>
 <br>
-<button onclick="goHome()">Return to Home</button>
+<form action="http://localhost:8080/index.html" method="get">
+    <input type="submit" value="index">
+</form>
 
 </body>
 </html>
