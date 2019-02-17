@@ -6,7 +6,11 @@ import http.server.filehandling.KnownFileTypes;
 import http.server.filehandling.StandardFileNames;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 abstract class HttpResponse {
 
@@ -18,7 +22,7 @@ abstract class HttpResponse {
     PrintWriter out;
     private BufferedOutputStream dataOut;
 
-    HttpResponse(String fileRequested, PrintWriter out, BufferedOutputStream dataOut) throws IOException {
+    HttpResponse(String fileRequested, PrintWriter out, BufferedOutputStream dataOut){
         this.dataOut = dataOut;
         this.out = out;
 
@@ -36,8 +40,25 @@ abstract class HttpResponse {
             System.err.println("Error retrieving params: " + e.getMessage());
         }
 
-        System.out.println(fileRequested);
-        System.out.println(params);
+        if(params != null){
+            Map<String, List<String>> paramList = null;
+            try {
+                URL url = new URL("http://?" + params);
+                paramList = URLParsing.splitQuery(url);
+            } catch (MalformedURLException e) {
+                System.err.println("Error parsing URL params: " + e.getMessage());
+            } catch (UnsupportedEncodingException e) {
+                System.err.println("Error encoding URL params: " + e.getMessage());
+            }
+
+            if(paramList != null){
+                for (String key : paramList.keySet()){
+                    System.out.println(key + " " + paramList.get(key));
+                }
+            }
+
+
+        }
 
         this.file = FileRetriever.getRequestedFile(fileRequested);
 

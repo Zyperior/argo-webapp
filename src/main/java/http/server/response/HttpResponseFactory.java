@@ -12,10 +12,13 @@ public class HttpResponseFactory {
         switch (type) {
             case GET:
                 new HttpResponseGet(fileRequested,out,dataOut);
+                break;
             case HEAD:
                 new HttpResponseHead(fileRequested,out,dataOut);
+                break;
             case INVALID:
                 new HttpResponseInvalid(fileRequested,out,dataOut);
+                break;
             default:
                 new HttpResponseInvalid(fileRequested,out,dataOut);
         }

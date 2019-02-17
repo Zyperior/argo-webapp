@@ -4,6 +4,39 @@
 
     <groupId>argowebapp</groupId>
     <artifactId>argowebapp</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <!-- <packaging>jar</packaging>  -->
+    <properties>
+        <auto-service.version>1.0-rc2</auto-service.version>
+        <maven-compiler-ARGOPlugin.version>
+            3.5.1
+        </maven-compiler-ARGOPlugin.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.google.auto.service</groupId>
+            <artifactId>auto-service</artifactId>
+            <version>${auto-service.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <ARGOPlugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-ARGOPlugin</artifactId>
+                <version>${maven-compiler-ARGOPlugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </ARGOPlugin>
+
+        </plugins>
+    </build>
 </project>
