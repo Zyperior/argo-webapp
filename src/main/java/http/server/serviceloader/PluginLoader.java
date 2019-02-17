@@ -30,8 +30,10 @@ public class PluginLoader {
 
         ServiceLoader<ARGOPlugin> loader = ServiceLoader.load(ARGOPlugin.class, ucl);
 
-        for (ARGOPlugin ARGOPlugin : loader) {
-            ARGOPlugin.doSomething(doThis,params);
+        for (ARGOPlugin plugin : loader) {
+            if(plugin.getClass().getAnnotation(PluginType.class).value().equals(thisPlugin)){
+                plugin.doSomething(doThis,params);
+            }
         }
 
     }
