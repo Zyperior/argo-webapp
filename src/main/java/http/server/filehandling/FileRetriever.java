@@ -12,6 +12,10 @@ public class FileRetriever {
 
         File file;
 
+        if(fileRequested.equals("501")){
+            fileRequested = BAD_REQUEST.getFileName();
+        }
+
         if (fileRequested.endsWith("/")) {
             fileRequested += DEFAULT_FILE.getFileName();
         }

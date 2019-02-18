@@ -10,17 +10,10 @@ public class FileReader {
 
         int fileLength = (int) file.length();
 
-        FileInputStream fileIn = null;
         byte[] fileData = new byte[fileLength];
-
-        try {
-            fileIn = new FileInputStream(file);
+        try (FileInputStream fileIn = new FileInputStream(file)) {
             //noinspection ResultOfMethodCallIgnored
             fileIn.read(fileData);
-        } finally {
-            if (fileIn != null) {
-                fileIn.close();
-            }
         }
 
         return fileData;

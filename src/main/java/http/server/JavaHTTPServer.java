@@ -1,7 +1,8 @@
 package http.server;
 
-import http.server.response.HttpResponseFactory;
-import http.server.response.RequestType;
+import http.server.request.HttpRequest;
+import http.server.response.HttpResponse;
+import http.server.request.RequestType;
 
 import java.io.*;
 import java.net.Socket;
@@ -43,15 +44,25 @@ public class JavaHTTPServer implements Runnable {
 				}
 			}
 
-            if (method.equals("GET")) {
-                type = RequestType.GET;
-            } else if (method.equals("HEAD")) {
-                type = RequestType.HEAD;
-            } else if (method.equals("POST")) {
-                type = RequestType.POST;
-            }
+			switch (method) {
+				case "GET":
+					type = RequestType.GET;
+					break;
+				case "HEAD":
+					type = RequestType.HEAD;
+					break;
+				case "POST":
+					type = RequestType.POST;
+					break;
+			}
 
-            HttpResponseFactory.createResponse(type, fileRequested, out, dataOut);
+			HttpRequest myRequest = new HttpRequest(type,fileRequested);
+
+			HttpResponse myResponse = myRequest.processRequest();
+
+            myResponse.sendResponse(out, dataOut);
+
+            //HttpResponseFactory.createResponse(type, fileRequested, out, dataOut);
 
 
 		} catch (IOException ioe) {
