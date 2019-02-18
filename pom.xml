@@ -35,16 +35,6 @@
                 </configuration>
             </plugin>
 
-            <ARGOPlugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-ARGOPlugin</artifactId>
-                <version>${maven-compiler-ARGOPlugin.version}</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </ARGOPlugin>
-
         </plugins>
     </build>
 </project>
