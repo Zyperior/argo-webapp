@@ -3,16 +3,16 @@ Todo:
 Andreas: 
 Refaktorering av responsklasserna till request. 
 Skapa en responsklass som endast representerar responsdata.
-Skapa ett skal fÃ¶r plugin och lÃ¤gga i ett eget repo.
+Skapa ett skal får plugin och lägga i ett eget repo.
 
 Gustav:
-JSON-plugin. Tar emot parametrar och lagrar. Kan Ã¥terge parametrarna som JSON
+JSON-plugin. Tar emot parametrar och lagrar. Kan återge parametrarna som JSON
 
-Ã–yvind:
+Öyvind:
 Logger-plugin som lagrar klientrequest.
 
 Robin:
-Hantera binÃ¤rdata sÃ¥ den representeras korrekt.
+Hantera binädata så den representeras korrekt.
 
 
 Ifall du ser fel javaversion i din utvecklingsmiljö:
