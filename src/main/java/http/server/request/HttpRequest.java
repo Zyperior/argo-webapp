@@ -88,10 +88,10 @@ public class HttpRequest {
 
             //Do something with params..?
 
-            httpResponse = new HttpResponse(file,false, "HTTP/1.1 200 OK");
+            httpResponse = new HttpResponse(file,null,false,null, "HTTP/1.1 200 OK");
 
             if(fileNotFound){
-                httpResponse = new HttpResponse(file,false,"HTTP/1.1 404 File Not Found");
+                httpResponse = new HttpResponse(file,null,false,null,"HTTP/1.1 404 File Not Found");
             }
 
         }
@@ -100,7 +100,7 @@ public class HttpRequest {
         }
         if(httpResponse==null){
             this.file = FileRetriever.getRequestedFile("./501.html");
-            httpResponse = new HttpResponse(file,false,"HTTP/1.1 501 Bad Request");
+            httpResponse = new HttpResponse(file,null,false,null,"HTTP/1.1 501 Bad Request");
         }
 
         return httpResponse;
