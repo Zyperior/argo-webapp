@@ -4,6 +4,7 @@ import http.server.filehandling.FileRetriever;
 import http.server.filehandling.KnownFileTypes;
 import http.server.filehandling.StandardFileNames;
 import http.server.response.HttpResponse;
+import http.server.response.StandardResponseHeader;
 import http.server.serviceloader.PluginLoader;
 
 import java.io.File;
@@ -88,10 +89,11 @@ public class HttpRequest {
 
             //Do something with params..?
 
-            httpResponse = new HttpResponse(file,null,false,null, "HTTP/1.1 200 OK");
+            httpResponse = new HttpResponse(file, StandardResponseHeader.OK_200);
 
             if(fileNotFound){
-                httpResponse = new HttpResponse(file,null,false,null,"HTTP/1.1 404 File Not Found");
+                this.file = FileRetriever.getRequestedFile("./404.html");
+                httpResponse = new HttpResponse(file,StandardResponseHeader.NOTFOUND_404);
             }
 
         }
@@ -100,7 +102,7 @@ public class HttpRequest {
         }
         if(httpResponse==null){
             this.file = FileRetriever.getRequestedFile("./501.html");
-            httpResponse = new HttpResponse(file,null,false,null,"HTTP/1.1 501 Bad Request");
+            httpResponse = new HttpResponse(file, StandardResponseHeader.NOTIMPLEMENTED_501);
         }
 
         return httpResponse;
