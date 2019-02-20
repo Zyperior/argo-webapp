@@ -19,15 +19,16 @@
     </form>
 
     <form action="/v1/VisitorDB" method="get">
-        firstname: <input type="text" name="fname">
+        <input type="hidden" name="insert">
+        name: <input type="text" name="name">
+        comment: <input type="text" name="comment">
         <br>
         <input type="submit" value="submit">
     </form>
 
-    <form action="/v1/Ovindsplugin" method="get">
-        firstname: <input type="text" name="fname">
-        <br>
-        <input type="submit" value="submit">
+    <form action="/v1/VisitorDB" method="get">
+        <input type="hidden" name="getAll">
+        <input type="submit" value="hämta databas">
     </form>
 
 </body>
