@@ -92,7 +92,7 @@ public class HttpRequest {
             httpResponse = new HttpResponse(file, StandardResponseHeader.OK_200);
 
             if(fileNotFound){
-                this.file = FileRetriever.getRequestedFile("./404.html");
+                this.file = FileRetriever.getRequestedFile("./files/html/404.html");
                 httpResponse = new HttpResponse(file,StandardResponseHeader.NOTFOUND_404);
             }
 
@@ -101,7 +101,7 @@ public class HttpRequest {
             httpResponse = PluginLoader.run(requestedURL,"test", paramList);
         }
         if(httpResponse==null){
-            this.file = FileRetriever.getRequestedFile("./501.html");
+            this.file = FileRetriever.getRequestedFile("./files/html/501.html");
             httpResponse = new HttpResponse(file, StandardResponseHeader.NOTIMPLEMENTED_501);
         }
 
