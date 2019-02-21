@@ -13,7 +13,7 @@ import java.util.ServiceLoader;
 public class PluginLoader {
 
     private static URLClassLoader createClassLoader(){
-        File loc = new File("./plugins");
+        File loc = new File("./plugins/v1");
         File[] fileList = loc.listFiles(fle -> fle.getPath().toLowerCase().endsWith(".jar"));
         URL[] urls = new URL[0];
         if (fileList != null) {
