@@ -20,7 +20,7 @@ function loadGuestBook() {
 
         var visitorsJSON = JSON.parse(this.responseText);
 
-        var iframe = document.getElementById('guestBook');
+        var iframe = document.getElementById('iframe_guestBook');
         var html_string = '<html><head></head><body></body></html>';
         var iframedoc = iframe.document;
         if (iframe.contentDocument)
