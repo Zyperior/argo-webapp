@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="http://localhost:8080">
+    <script src="/files/js/visitorScripts.js"></script>
+    <link rel="icon" href="data:,">
+    <meta charset="UTF-8">
+    <title>Argo Visitors</title>
+
+</head>
+<body>
+<h3>Welcome to sign our guestbook</h3>
+<br>
+<table width="700">
+    <tr>
+        <td width="100">Your name:</td>
+        <td width="600"><input type="text" name="name" size="25" id="name"></td>
+    </tr>
+    <tr>
+        <td width="100">Greeting:</td>
+        <td width="600"><input type="text" name="comment" size="50" id="comment"></td>
+    </tr>
+    <tr>
+        <td width="100"></td>
+        <td><input type="Button" value="Sign" onclick="insertInGuestBook(document.getElementById('name').value,document.getElementById('comment').value)"></td>
+    </tr>
+    <tr>
+        <td wdith="100"></td>
+        <td width ="600"><iframe id="guestBook" width="600" ></iframe></td>
+    </tr>
+</table>
+</body>
+</html>
