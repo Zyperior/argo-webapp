@@ -1,5 +1,12 @@
 package http.server.filehandling;
 
+
+/**
+ * Enum for setting the current supported file-types of the server.
+ * Used for retrieving the correct content-type in the HTTP-Response
+ *
+ * Created by Andreas Albihn, 2019-02-14
+ */
 public enum KnownFileTypes {
     HTML(".html", "text/html"),
     CSS(".css", "text/css"),

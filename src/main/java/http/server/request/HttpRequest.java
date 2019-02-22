@@ -13,6 +13,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A representation of a parsed request.
+ *
+ * Created by Andreas Albihn, 2019-02-14
+ * Contributors: Robin Säfström
+ */
 public class HttpRequest {
 
     private RequestType type;
@@ -87,6 +93,12 @@ public class HttpRequest {
         }
     }
 
+    /**
+     * Checks if a file is requested. If not forwards the request parameters to Service-loader.
+     * Returns a HttpResponse object to be forwarded by server to the client.
+     *
+     * @return HttpResponse
+     */
     public HttpResponse processRequest(){
         HttpResponse httpResponse;
         boolean getFile = isFileRequested(requestedURL);
@@ -114,6 +126,12 @@ public class HttpRequest {
 
     }
 
+    /**
+     * Checks if the requested url ends with a supported file suffix.
+     *
+     * @param url String - Requested URL
+     * @return booelan
+     */
     private boolean isFileRequested(String url){
         for (KnownFileTypes ftype : KnownFileTypes.values()) {
             if(url.endsWith(ftype.getSuffix())){

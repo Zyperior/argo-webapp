@@ -15,7 +15,8 @@ import java.util.Date;
  * <p>Custom responses can be created or use standard known response types
  * @see StandardResponseHeader </p>
  *
- * @author name: Andreas Albihn
+ * Created by Andreas Albihn 2019-02-14
+ * Contributors: Robin Säfström
  */
 public class HttpResponse {
 
@@ -26,8 +27,6 @@ public class HttpResponse {
     private byte[] bodyData;
 
     /**
-     * Constructs a head-response to the client, no body
-     *
      * @param customHeader your header response, will print in order
      */
     public HttpResponse(String... customHeader){
@@ -36,8 +35,6 @@ public class HttpResponse {
     }
 
     /**
-     * Constructs a head-response to the client, no body
-     *
      * @param header your header response of the known default response type
      */
     public HttpResponse(StandardResponseHeader header){
@@ -52,8 +49,6 @@ public class HttpResponse {
     }
 
     /**
-     * Constructs a response to the client
-     *
      * @param file the file you want to be printed as bytes in the response body
      * @param customHeader your header response, will print in order
      */
@@ -75,8 +70,6 @@ public class HttpResponse {
     }
 
     /**
-     * Constructs a response to the client
-     *
      * @param file the file you want to be printed as bytes in the response body
      * @param header your header response of the known default response types
      */
@@ -86,8 +79,6 @@ public class HttpResponse {
     }
 
     /**
-     * Constructs a response to the client
-     *
      * @param bodyData will be printed as bytes in the response body
      * @param fileType will set the content of the response to the known types, null/default = "text/plain"
      * @param customHeader your header response, will print in order
@@ -103,8 +94,6 @@ public class HttpResponse {
     }
 
     /**
-     * Constructs a response to the client
-     *
      * @param bodyData will be printed as bytes in the response body
      * @param fileType will set the content of the response to the known types, null/default = "text/plain"
      * @param header your header response of the known default response types

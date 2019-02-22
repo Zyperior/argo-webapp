@@ -1,5 +1,11 @@
 package http.server.response;
 
+/**
+ * Enum for standard response headers
+ * Used to set correct headers for the corresponding respons
+ *
+ * Created by Andreas Albihn, 2019-02-18
+ */
 public enum StandardResponseHeader {
     OK_200("HTTP/1.1 200 OK"),
     CREATED_201("HTTP/1.1 201 Created"),

@@ -8,9 +8,20 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+/**
+ * Single-method class for parsing parameters from requests to be interpreted in plugin modules.
+ *
+ * Created by Unknown, found on StackOverflow
+ * <a href="https://stackoverflow.com/questions/13592236/parse-a-uri-string-into-name-value-collection">Source</a>
+ */
+class URLParsing {
 
-public class URLParsing {
-
+    /**
+     * Splits the parameters from the url and puts them in a map.
+     * Can handle null-values and multiple values.
+     * @param url URL - Complete URL with parameters
+     * @return Map<String, List<String>>
+     */
     static Map<String, List<String>> splitQuery(URL url) {
 
 

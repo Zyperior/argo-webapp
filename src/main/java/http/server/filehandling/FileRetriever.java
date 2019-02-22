@@ -4,10 +4,22 @@ import java.io.File;
 
 import static http.server.filehandling.StandardFileNames.*;
 
+/**
+ * Single-method class for retrieving the requested file.
+ *
+ * Created by Andreas Albihn, 2019-02-14
+ */
 public class FileRetriever {
 
     private static final File WEB_ROOT = new File(".");
 
+    /**
+     * @param fileRequested String - filepath from server root.
+     *                      If it ends with "/", will be set to the default index.html path.
+     *                      If not found, will be set to the default file not found 404.html path.
+     *
+     * @return File
+     */
     public static File getRequestedFile(String fileRequested) {
 
         File file;

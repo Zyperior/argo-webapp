@@ -10,8 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 
+/**
+ * Class for retrieving the plugins and running them with the selected parameters from the client request.
+ *
+ * Created by Andreas Albihn, 2019-02-17 based on the code from lecture
+ */
 public class PluginLoader {
 
+    /**
+     * Creates a URLClassLoader object containing a list of the .jar files in the specified plugin-folder
+     * @return URLClassLoader
+     */
     private static URLClassLoader createClassLoader(){
         File loc = new File("./plugins/v1");
         File[] fileList = loc.listFiles(fle -> fle.getPath().toLowerCase().endsWith(".jar"));
@@ -30,6 +39,15 @@ public class PluginLoader {
         return new URLClassLoader(urls);
     }
 
+    /**
+     * Checks the URLClassLoader list and runs the corresponding class annotated with a PluginType annotation.
+     * Returns a HttpResponse from the plugin to the server.
+     *
+     * @param thisPlugin String - must match value of PluginType-annotation in plugin.
+     * @param doThis String - not used.
+     * @param paramList Map - Keys and values sent by the client to be used in the plugin.
+     * @return HttpResponse
+     */
     public static HttpResponse run(String thisPlugin, String doThis, Map<String, List<String>> paramList) {
         URLClassLoader ucl = createClassLoader();
 
