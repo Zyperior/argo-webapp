@@ -1,11 +1,14 @@
 package http.server;
 
 import http.server.request.HttpRequest;
+import http.server.request.RequestParser;
 import http.server.response.HttpResponse;
+import http.server.response.StandardResponseHeader;
 import http.server.request.RequestType;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class JavaHTTPServer implements Runnable {
@@ -24,46 +27,41 @@ public class JavaHTTPServer implements Runnable {
 		RequestType type = RequestType.INVALID;
 		String fileRequested = "";
 		String method = "";
+		String requestData = "";
+		int streamLength = 0;
+		InputStream inputStream = null;
+		boolean verbose = true;
+		byte[] buffer = null;
 		try {
 
-			in = new BufferedReader(new InputStreamReader(connect.getInputStream()));
 			out = new PrintWriter(connect.getOutputStream());
 			dataOut = new BufferedOutputStream(connect.getOutputStream());
+			inputStream = connect.getInputStream();
 
-			String input = in.readLine();
+			streamLength = inputStream.available();
+			buffer = new byte[streamLength + 1000];
+			inputStream.read(buffer, 0, streamLength);
+			requestData = new String(buffer, 0, buffer.length);
 
-			// Dont parse nulls!
-			if (input != null) {
-				StringTokenizer parse = new StringTokenizer(input);
+			// use this object to get the data you want from the request
+			// methods not starting with get arent intended for external use
+			RequestParser n = new RequestParser(requestData);
 
-				// Dont request more tokens than we have!
-				if (parse.hasMoreTokens()) {
-					method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
-
-					fileRequested = parse.nextToken();
-				}
+			if(verbose) {
+				System.out.println("CONTENT-LENGTH: "+ n.getContentLength());
+				System.out.println("POST-PARAMS: "+n.getParams());
+				System.out.println("FORMDATA: "+n.getFormData());
+				System.out.println("REQUEST: "+n.getRequestType());
+				System.out.println("URL: "+ n.getFileRequested());
 			}
-
-			switch (method) {
-				case "GET":
-					type = RequestType.GET;
-					break;
-				case "HEAD":
-					type = RequestType.HEAD;
-					break;
-				case "POST":
-					type = RequestType.POST;
-					break;
+			
+			
+			
+			if (n.getFileRequested() != null || n.getRequestType() != RequestType.INVALID) {
+				HttpRequest myRequest = new HttpRequest(n.getRequestType(), "/" + n.getFileRequested());
+				HttpResponse myResponse = myRequest.processRequest();
+				myResponse.sendResponse(out, dataOut);
 			}
-
-			HttpRequest myRequest = new HttpRequest(type,fileRequested);
-
-			HttpResponse myResponse = myRequest.processRequest();
-
-            myResponse.sendResponse(out, dataOut);
-
-            //HttpResponseFactory.createResponse(type, fileRequested, out, dataOut);
-
 
 		} catch (IOException ioe) {
 
@@ -72,8 +70,8 @@ public class JavaHTTPServer implements Runnable {
 		} finally {
 
 			try {
-				if (in != null) {
-					in.close();
+				if (inputStream != null) {
+					inputStream.close();
 				}
 				if (out != null) {
 					out.close();
