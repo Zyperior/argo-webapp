@@ -58,7 +58,7 @@ public class JavaHTTPServer implements Runnable {
 			
 			
 			if (n.getFileRequested() != null || n.getRequestType() != RequestType.INVALID) {
-				HttpRequest myRequest = new HttpRequest(n.getRequestType(), "/" + n.getFileRequested());
+				HttpRequest myRequest = new HttpRequest(n);
 				HttpResponse myResponse = myRequest.processRequest();
 				myResponse.sendResponse(out, dataOut);
 			}

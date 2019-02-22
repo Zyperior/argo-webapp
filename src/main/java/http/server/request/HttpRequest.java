@@ -22,17 +22,22 @@ public class HttpRequest {
     private File file;
     private boolean fileNotFound = false;
 
-    public HttpRequest(RequestType type, String requestedURL){
+    public HttpRequest(RequestParser parsedRequest){
 
-        this.type = type;
-        this.requestedURL = requestedURL;
+        this.type = parsedRequest.getRequestType();
+        this.requestedURL = parsedRequest.getFileRequested();
 
         if(type==RequestType.GET){
-            parseURL(requestedURL);
+            parseURL(parsedRequest.getFileRequested());
+            setParamList(params);
+        }
+        else if(type==RequestType.POST){
+            parseURL(parsedRequest.getFileRequested()+"?"+parsedRequest.getParams());
             setParamList(params);
         }
 
     }
+
 
     public RequestType getType() {
         return type;

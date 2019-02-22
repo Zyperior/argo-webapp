@@ -5,8 +5,9 @@ function reloadPage(){
 function insertInGuestBook(name, comment){
     var xhttp = new XMLHttpRequest();
 
-    xhttp.open("GET", "../v1/VisitorDB?insert=&name=" + name + "&comment=" + comment, true);
-    xhttp.send();
+    xhttp.open("POST", "../v1/VisitorDB", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send("insert=&name="+name+"&comment="+comment);
     setTimeout(reloadPage,500);
 
 }
