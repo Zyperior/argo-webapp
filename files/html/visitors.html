@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
     <base href="http://localhost:8080">
-    <script src="/files/js/visitorScripts.js"></script>
+    <script src="/files/js/visitorScripts.js">
+
+    </script>
     <link rel="stylesheet" type="text/css" href="/files/css/visitors.css">
     <link rel="icon" href="data:,">
     <meta charset="UTF-8">
     <title>Argo Visitors</title>
-
+    <script>
+        window.onload = loadGuestBook();
+    </script>
 </head>
 <body>
 <h3>Welcome to sign our guestbook</h3>
@@ -27,8 +31,9 @@
     </tr>
     <tr>
         <td wdith="100"></td>
-        <td width ="600"><iframe id="iframe_guestBook" width="600" ></iframe></td>
+        <td width ="600"><iframe id="iframe_guestBook" width="600" src="files/html/guestbookiframe.html"></iframe></td>
     </tr>
 </table>
 </body>
+
 </html>

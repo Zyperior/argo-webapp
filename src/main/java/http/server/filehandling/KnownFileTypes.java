@@ -7,7 +7,7 @@ public enum KnownFileTypes {
     PDF("pdf", "application/pdf"),
     JPEG(".jpeg", "image/jpeg"),
     PNG(".png", "image/png"),
-    JSON(".json","application/json"),
+    JSON(".json","application/json ; charset=utf-8"),
     DEFAULT("/", "text/html");
 
     private String suffix;
