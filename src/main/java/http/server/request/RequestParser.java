@@ -10,8 +10,10 @@ package http.server.request;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
@@ -27,13 +29,15 @@ public class RequestParser {
 	private String contentLength;
 	private String params;
 	private String plainFileName;
+	private InetAddress ip;
 
-	public RequestParser(String s) {
+	public RequestParser(String s, InetAddress ip) {
 		this.type = gRequestType(s);
 		this.fileRequested = gFileRequested(s);
 		this.formData = gFormData(s);
 		this.contentLength = gContentLength(s);
 		this.params = gParams(s);
+		this.ip = ip;
 	}
 
 	public RequestType getRequestType() {
@@ -59,8 +63,7 @@ public class RequestParser {
 	public String getPlainFileName() {
 		return this.plainFileName;
 	}
-	
-	
+
 	public String[] getArr(String s) {
 		return s.split("\\r?\\n");
 	}
@@ -213,6 +216,14 @@ public class RequestParser {
 
 		return formData;
 
+	}
+
+	@Override
+	public String toString() {
+		Date d = new Date();
+
+		return d.toString() + " TYPE: " + this.getRequestType().toString() + ", URL: " + this.fileRequested
+				+ ", CLIENT IP: " + this.ip;
 	}
 
 }
