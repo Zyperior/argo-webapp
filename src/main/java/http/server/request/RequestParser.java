@@ -1,4 +1,4 @@
-/*Written by Robin Säfström for ITHS 2019
+/*Written by Robin SÃ¤fstrÃ¶m for ITHS 2019
  * dumb parser
  * 
  * 
@@ -7,19 +7,13 @@
  */
 package http.server.request;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import http.server.filehandling.FileStore;
 
 public class RequestParser {
 
@@ -220,10 +214,15 @@ public class RequestParser {
 
 	@Override
 	public String toString() {
+		String file = "";
+		if (!this.formData.isEmpty() && !this.plainFileName.equals("-1")) {
+			file = "FILE POSTED : " + this.plainFileName;
+		}
+
 		Date d = new Date();
 
-		return d.toString() + " TYPE: " + this.getRequestType().toString() + ", URL: " + this.fileRequested
-				+ ", CLIENT IP: " + this.ip;
+		return d.toString() + " TYPE: " + this.getRequestType().toString() + ", URL: " + this.fileRequested + ", "
+				+ file + ", CLIENT IP: " + this.ip;
 	}
 
 }
