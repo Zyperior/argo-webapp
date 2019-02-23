@@ -13,7 +13,9 @@ public enum KnownFileTypes {
     JAVASCRIPT(".js", "text/javascript"),
     PDF("pdf", "application/pdf"),
     JPEG(".jpeg", "image/jpeg"),
+    JPG(".jpg", "image/jpg"),
     PNG(".png", "image/png"),
+    SVG(".svg", "image/svg"),
     JSON(".json","application/json ; charset=utf-8"),
     DEFAULT("/", "text/html");
 
