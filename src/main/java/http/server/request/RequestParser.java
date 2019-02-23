@@ -1,4 +1,4 @@
-/*Written by Robin Safstrom for ITHS 2019
+/*Written by Robin Säfström for ITHS 2019
  * dumb parser
  * 
  * 
@@ -26,6 +26,7 @@ public class RequestParser {
 	private ArrayList<String> formData;
 	private String contentLength;
 	private String params;
+	private String plainFileName;
 
 	public RequestParser(String s) {
 		this.type = gRequestType(s);
@@ -55,6 +56,11 @@ public class RequestParser {
 		return this.params;
 	}
 
+	public String getPlainFileName() {
+		return this.plainFileName;
+	}
+	
+	
 	public String[] getArr(String s) {
 		return s.split("\\r?\\n");
 	}
@@ -103,7 +109,7 @@ public class RequestParser {
 		String requestData[] = getArr(sk);
 
 		for (String s : requestData) {
-			if(s.contains("-----")) {
+			if (s.contains("-----")) {
 				break;
 			}
 			if (parseParams == true) {
@@ -169,10 +175,9 @@ public class RequestParser {
 		return contentLength;
 	}
 
-
 	public ArrayList<String> gFormData(String sk) {
 		ArrayList<String> formData = new ArrayList<String>();
-		String fileName = "";
+		String fileName = "-1";
 		int fileBegins = -1;
 		int fileEnd = -1;
 		ArrayList<String> requestData = new ArrayList<>(Arrays.asList(getArr(sk)));
@@ -204,7 +209,10 @@ public class RequestParser {
 			}
 
 		}
+		this.plainFileName = fileName;
+
 		return formData;
+
 	}
 
 }
