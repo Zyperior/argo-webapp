@@ -11,9 +11,11 @@ public enum StandardResponseHeader {
     CREATED_201("HTTP/1.1 201 Created"),
     ACCEPTED_202("HTTP/1.1 202 Accepted"),
     NOTFOUND_404("HTTP/1.1 404 File Not Found"),
-    NOTIMPLEMENTED_501("HTTP/1.1 501 Not Implemented");
-
-        String header;
+    NOTIMPLEMENTED_501("HTTP/1.1 501 Not Implemented"),
+	BAD_REQUEST("HTTP/1.1 400: Bad Request "),
+	TEAPOT("HTTP/1.1 418: I'm a teapot ");
+	
+	String header;
 
         StandardResponseHeader(String header){
             this.header=header;
