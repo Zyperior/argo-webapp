@@ -9,13 +9,19 @@ import java.util.Arrays;
 
 public class FileStore {
 
-	
-	
 	public static void storePlain(ArrayList<String> data, String path, String fileName) {
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path+"/"+fileName))) {
+		if (path.length() > 1) {
+			path = path.substring(1);
+		}
+		if (path.equals("/")) {
+			path = "";
+		} else {
 			File dir = new File(path);
 			dir.mkdir();
+			path = path + "/";
+		}
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path + fileName))) {
+
 			for (String s : data) {
 				bw.write(s);
 				bw.newLine();
@@ -26,14 +32,7 @@ public class FileStore {
 			e.printStackTrace();
 
 		}
-		
-		
-		
-}
-	
-	
-	
-}
-	
-	
 
+	}
+
+}
