@@ -1,4 +1,4 @@
-/*Written by Robin Säfström for ITHS 2019
+/*Written by Robin Safstrom for ITHS 2019
  * dumb parser
  * 
  * 
@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import http.server.filehandling.FileStore;
 
 public class RequestParser {
 
@@ -167,7 +169,7 @@ public class RequestParser {
 		return contentLength;
 	}
 
-	// moving out to its own class
+
 	public ArrayList<String> gFormData(String sk) {
 		ArrayList<String> formData = new ArrayList<String>();
 		String fileName = "";
@@ -191,21 +193,14 @@ public class RequestParser {
 
 		int counter = 0;
 		if (fileBegins != -1 && fileEnd != -1) {
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
-				for (String s : requestData) {
-					if (counter >= fileBegins && counter <= fileEnd) {
-						bw.write(s);
-						bw.newLine();
-						formData.add(s);
-					}
 
-					counter++;
+			for (String s : requestData) {
+				if (counter >= fileBegins && counter <= fileEnd) {
+
+					formData.add(s);
 				}
 
-			} catch (IOException e) {
-
-				e.printStackTrace();
-
+				counter++;
 			}
 
 		}
