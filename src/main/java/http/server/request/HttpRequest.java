@@ -42,7 +42,10 @@ public class HttpRequest {
             parseURL(parsedRequest.getFileRequested()+"?"+parsedRequest.getParams());
             setParamList(params);
             //store file
-            FileStore.storePlain(parsedRequest.getFormData(), parsedRequest.getFileRequested(),parsedRequest.getPlainFileName());
+          if(!parsedRequest.getFormData().isEmpty()&&!parsedRequest.getPlainFileName().equals("-1")) {
+        	  FileStore.storePlain(parsedRequest.getFormData(), parsedRequest.getFileRequested(),parsedRequest.getPlainFileName());  
+          }
+            
         }
 
     }
