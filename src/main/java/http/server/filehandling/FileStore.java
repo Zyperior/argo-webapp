@@ -17,7 +17,7 @@ public class FileStore {
 			path = "";
 		} else {
 			File dir = new File(path);
-			dir.mkdir();
+			dir.mkdirs();
 			path = path + "/";
 		}
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path + fileName))) {
