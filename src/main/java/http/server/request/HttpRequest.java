@@ -1,6 +1,7 @@
 package http.server.request;
 
 import http.server.filehandling.FileRetriever;
+import http.server.filehandling.FileStore;
 import http.server.filehandling.KnownFileTypes;
 import http.server.filehandling.StandardFileNames;
 import http.server.response.HttpResponse;
@@ -17,7 +18,7 @@ import java.util.Map;
  * A representation of a parsed request.
  *
  * Created by Andreas Albihn, 2019-02-14
- * Contributors: Robin Säfström
+ * Contributors: Robin Safstrom
  */
 public class HttpRequest {
 
@@ -27,7 +28,7 @@ public class HttpRequest {
     private Map<String, List<String>> paramList = null;
     private File file;
     private boolean fileNotFound = false;
-
+   
     public HttpRequest(RequestParser parsedRequest){
 
         this.type = parsedRequest.getRequestType();
@@ -40,6 +41,8 @@ public class HttpRequest {
         else if(type==RequestType.POST){
             parseURL(parsedRequest.getFileRequested()+"?"+parsedRequest.getParams());
             setParamList(params);
+            //store file
+            FileStore.storePlain(parsedRequest.getFormData(), parsedRequest.getFileRequested(),parsedRequest.getPlainFileName());
         }
 
     }
