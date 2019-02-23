@@ -7,6 +7,8 @@ import http.server.response.StandardResponseHeader;
 import http.server.request.RequestType;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -21,12 +23,8 @@ public class JavaHTTPServer implements Runnable {
 
 	public void run() {
 
-		BufferedReader in = null;
 		PrintWriter out = null;
 		BufferedOutputStream dataOut = null;
-		RequestType type = RequestType.INVALID;
-		String fileRequested = "";
-		String method = "";
 		String requestData = "";
 		int streamLength = 0;
 		InputStream inputStream = null;
@@ -45,20 +43,18 @@ public class JavaHTTPServer implements Runnable {
 
 			// use this object to get the data you want from the request
 			// methods not starting with get arent intended for external use
-			RequestParser n = new RequestParser(requestData);
+			RequestParser n = new RequestParser(requestData, connect.getInetAddress());
 
-			if(verbose) {
+			if (verbose) {
 				System.out.println();
-				System.out.println("CONTENT-LENGTH: "+ n.getContentLength());
-				System.out.println("POST-PARAMS: "+n.getParams());
-				System.out.println("FORMDATA: "+n.getFormData());
-				System.out.println("REQUEST: "+n.getRequestType());
-				System.out.println("URL: "+ n.getFileRequested());
+				System.out.println("CONTENT-LENGTH: " + n.getContentLength());
+				System.out.println("POST-PARAMS: " + n.getParams());
+				System.out.println("FORMDATA: " + n.getFormData());
+				System.out.println("REQUEST: " + n.getRequestType());
+				System.out.println("URL: " + n.getFileRequested());
 				System.out.println();
 			}
-			
-			
-			
+
 			if (n.getFileRequested() != null || n.getRequestType() != RequestType.INVALID) {
 				HttpRequest myRequest = new HttpRequest(n);
 				HttpResponse myResponse = myRequest.processRequest();
