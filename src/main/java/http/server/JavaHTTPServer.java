@@ -30,7 +30,7 @@ public class JavaHTTPServer implements Runnable {
 		String requestData = "";
 		int streamLength = 0;
 		InputStream inputStream = null;
-		boolean verbose = true;
+		boolean verbose = false;
 		byte[] buffer = null;
 		try {
 
@@ -48,11 +48,13 @@ public class JavaHTTPServer implements Runnable {
 			RequestParser n = new RequestParser(requestData);
 
 			if(verbose) {
+				System.out.println();
 				System.out.println("CONTENT-LENGTH: "+ n.getContentLength());
 				System.out.println("POST-PARAMS: "+n.getParams());
 				System.out.println("FORMDATA: "+n.getFormData());
 				System.out.println("REQUEST: "+n.getRequestType());
 				System.out.println("URL: "+ n.getFileRequested());
+				System.out.println();
 			}
 			
 			
