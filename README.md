@@ -1,21 +1,7 @@
-Todo:
+Maven project with pom.xml
 
-Andreas: 
-Refaktorering av responsklasserna till request. 
-Skapa en responsklass som endast representerar responsdata.
-Skapa ett skal får plugin och lägga i ett eget repo.
-
-Gustav:
-JSON-plugin. Tar emot parametrar och lagrar. Kan återge parametrarna som JSON
-
-Öyvind:
-Logger-plugin som lagrar klientrequest.
-
-Robin:
-Hantera binädata så den representeras korrekt.
+VisitorDatabasePlugin.jar source code: https://github.com/Zyperior/argovisitorDBPlugin
+AnimalsPlugin.jar & ServerSettingsPlugin.jar source code: https://github.com/wuxxerno/argo-webapp-plugins
 
 
-Ifall du ser fel javaversion i din utvecklingsmiljö:
-Kolla att du har minst java 10 installerat
-Justera det kommenterade fältet i pom filen för din java version
-Projektet kräver sedan 2019-02-18 java ~10
+We havent completed the automated build process please use an ide.
