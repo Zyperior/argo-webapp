@@ -48,7 +48,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>10</release> <!-- Projektet kräver nog på en höft java 9 eller nyare, 11 funkar kanon -->
+                    <release>11</release> <!-- Projektet kräver nog på en höft java 9 eller nyare, 11 funkar kanon -->
                 </configuration>
             </plugin>
         </plugins>

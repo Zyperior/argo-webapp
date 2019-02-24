@@ -16,7 +16,7 @@ import java.util.Date;
  * @see StandardResponseHeader </p>
  *
  * Created by Andreas Albihn 2019-02-14
- * Contributors: Robin Säfström
+ * Contributors: Robin Safstrom
  */
 public class HttpResponse {
 
