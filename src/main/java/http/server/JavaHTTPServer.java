@@ -1,5 +1,6 @@
 package http.server;
 
+import http.server.request.HttpLogger;
 import http.server.request.HttpRequest;
 import http.server.request.RequestParser;
 import http.server.response.HttpResponse;
@@ -44,7 +45,7 @@ public class JavaHTTPServer implements Runnable {
 			// use this object to get the data you want from the request
 			// methods not starting with get arent intended for external use
 			RequestParser n = new RequestParser(requestData, connect.getInetAddress());
-
+			HttpLogger.log(n.toString(true));
 			if (verbose) {
 				System.out.println();
 				System.out.println("CONTENT-LENGTH: " + n.getContentLength());

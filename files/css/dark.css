@@ -1,0 +1,32 @@
+body {
+    background-color: Black;
+}
+
+h1 {
+    color: WhiteSmoke;
+    text-align: center;
+}
+
+p {
+     color: WhiteSmoke;
+	font-family: verdana;
+    font-size: 12px;
+}
+<style>
+* {
+  box-sizing: border-box;
+}
+.column {
+float:left;
+  width: 400px;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row {
+  margin: auto;
+ content: "";
+  clear: both;
+  display: table;
+	padding-top: 100px;
+}

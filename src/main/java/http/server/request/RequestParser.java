@@ -1,4 +1,4 @@
-/*Written by Robin SÃ¤fstrÃ¶m for ITHS 2019
+/*Written by Robin safstrom for ITHS 2019
  * dumb parser
  * 
  * 
@@ -109,7 +109,7 @@ public class RequestParser {
 			if (s.contains("-----")) {
 				break;
 			}
-			if (parseParams == true && !s.isBlank()) {
+			if (parseParams == true && !s.isEmpty()) {
 				params = params + s;
 			}
 			if (s.length() == 0) {
@@ -230,5 +230,19 @@ public class RequestParser {
 		return d.toString() + " TYPE: " + this.getRequestType().toString() + ", URL: " + this.fileRequested + ", "
 				+ file + "CLIENT IP: " + this.ip;
 	}
+	//boolean just exists for overloading
+	public String toString(boolean b) {
+		String file = "";
+		if (!this.formData.isEmpty() && !this.plainFileName.equals("-1")) {
+			file = "FILE POSTED: " + this.plainFileName + ", ";
+		}
+		if (!this.params.equals("")) {
+			file = "POST PARAMS: " + this.params + ", ";
+		}
 
+		Date d = new Date();
+
+		return "<p>"+d.toString() + " TYPE: " + this.getRequestType().toString() + ", URL: " + this.fileRequested + ", "
+				+ file + "CLIENT IP: " + this.ip+"</p>";
+	}
 }
