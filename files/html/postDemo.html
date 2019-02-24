@@ -8,7 +8,6 @@
  
 <script>
 
-
 function log() {
 var xhr = new XMLHttpRequest();
 xhr.open("POST", "http://localhost:8080/v1/animals", true);
@@ -109,23 +108,6 @@ xhr.send("cats=fdg&count=25");
 </head>
 <body>
 
-
-
-
-
-
-
-
-
-localhost:8080/v1/setport?port=8081
-
-
-
-
-
-
-
-
 <p>Images are fetched from 2 webapis https://dog.ceo/dog-api/ and https://thecatapi.com/ note: both apis delivers one image per request so please be patient it might take a few seconds. They both have better json packaging options for speed, i just grabbed the get one random urls from both.</p>
 <p>Importing images will load them here whilst building a new site will redirect you to the new site</p>
 <button type="button"  onclick="loadDoc()">Build a new site with dogs!</button>
@@ -135,34 +117,20 @@ localhost:8080/v1/setport?port=8081
 <button type="button" onclick="tkg()">Clear the page!</button>
 <p>Change serverport,valid range 8080-8089(restart required)note: if you set a port you cant reach just delete or edit the config.xml in root</p> 
 
-
-
 <form action="http://localhost:8080/v1/setport" method="post" target="_blank">
   First name: <input type="text" name="port"><br>
   <button type="submit" formmethod="post" onclick="addItem(); return false;">Submit using POST</button>
 </form>
 
-
-
-
-
 <p>Are you a teapot? open the console to see the teapot response</p>
 <button type="button" onclick="log()">Display the requestlog!</button>
 <button type="button" onclick="tea()">Im a teapot 418!</button>
-<p>Upload File <---- stored in server root ONLY PLAINTEXT!!!! note: one file at the time!</p> </strong><input type="file" id="uploadfiles" multiple="multiple" /></label><br/>
+<p>Upload File <---- stored file/extension or msc ONLY PLAINTEXT!!!! note: one file at the time!</p> </strong><input type="file" id="uploadfiles" multiple="multiple" /></label><br/>
 <!-- Scripts -->
 <script src="../js/upload.js"></script>
 <p id="demo"></p>
  
- 
- localhost:8080/v1/setport?port=8081
- 
- 
- 
- 
  <div id="includedContent"></div>
- 
- 
  
  </body>
  
