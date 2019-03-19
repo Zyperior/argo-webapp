@@ -1,5 +1,5 @@
 Group project for school assignment by <br>
-https://github.com/Zyperior
+https://github.com/Zyperior <br>
 https://github.com/wuxxerno
 
 VisitorDatabasePlugin.jar source code: https://github.com/Zyperior/argovisitorDBPlugin (Andreas Albihn)
