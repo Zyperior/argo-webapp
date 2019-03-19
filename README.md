@@ -1,4 +1,4 @@
-Group project for school assignment by 
+Group project for school assignment by <br>
 https://github.com/Zyperior
 https://github.com/wuxxerno
 
